@@ -27,9 +27,11 @@ export const UpdateSetting: FC = () => {
           let text = await StorageAccessFramework.readAsStringAsync(fileUri, {encoding: EncodingType.Base64});
           const workbook = XLSX.read(text, {type: "base64"});
           const sheet_name_list = workbook.SheetNames;
-          const listPlots = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]])
+          const listPlots = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+          const listDate = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[1]]);
           await AsyncStorage.clear()
           await AsyncStorage.setItem("listPlots", JSON.stringify(listPlots));
+          await AsyncStorage.setItem("listDate", JSON.stringify(listDate));
 
         }
 
